@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="heroApp">
 <head>
   <meta charset="UTF-8">
   <title>Superhero Phone Book</title>
@@ -7,7 +7,30 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="app.js"></script>
 </head>
-<body>
+<body ng-controller="HeroController as vm">
+  <h4>Search Heroes
+  <input type="text" ng-model="vm.heroSearch"></h4>
+  <hr>
+  <div  ng-repeat="hero in vm.heroes | filter: {name: vm.heroSearch}" ng-class="{Marvel: comic == Marvel, DC: comic == DC }"> 
+    <p>{{ $index+1 }}. {{ hero.name }} - {{ hero.phone_number }} - {{ hero.comic }} - {{ hero.img_url }}</p>
+  </div>
+  <hr>
+  <hr>
+  <h3>Add New Hero</h3>
+  <div>
+    <label>Hero Name:</label>
+    <input type="text" ng-model="vm.newHeroName">
 
+    <label>Phone Number:</label>
+    <input type="text" ng-model="vm.newHeroNumber">
+
+    <label>Hero Comic:</label>
+    <input type="text" ng-model="vm.newComic">
+
+    <label>Hero Img URL:</label>
+    <input type="text" ng-model="vm.newImg">
+
+    <button ng-click="vm.addHero()">Add Hero</button>
+  </div>
 </body>
 </html>
